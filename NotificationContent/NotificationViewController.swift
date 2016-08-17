@@ -37,7 +37,7 @@ extension NotificationViewController : UNNotificationContentExtension {
         self.label?.text = content.body
         
         if let imageAbsoluteString = content.userInfo["imageAbsoluteString"] as? String,
-            url = URL(string: imageAbsoluteString) {
+            let url = URL(string: imageAbsoluteString) {
             URLSession.downloadImage(atURL: url) { [weak self] (data, error) in
                 if let _ = error {
                     return
@@ -54,7 +54,7 @@ extension NotificationViewController : UNNotificationContentExtension {
     }
     
     func didReceive(_ response: UNNotificationResponse,
-                    completionHandler completion: (UNNotificationContentExtensionResponseOption) -> Void) {
+                    completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
         
         //  if response is UNTextInputNotificationResponse
         if let textInputResponse = response as? UNTextInputNotificationResponse {

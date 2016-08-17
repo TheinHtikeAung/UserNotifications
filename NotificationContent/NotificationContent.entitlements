@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.emm</string>
+		<string>group.codigo.advancenotification</string>
 	</array>
 </dict>
 </plist>

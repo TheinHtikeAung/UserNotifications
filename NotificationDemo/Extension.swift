@@ -42,9 +42,9 @@ extension URL {
     static func resource(type :ResourceType) -> URL {
         switch type {
         case .Local:
-            return Bundle.main().urlForResource("cheer", withExtension: "png")!
+            return Bundle.main.url(forResource: "cheer", withExtension: "png")!
         case .Local1:
-            return Bundle.main().urlForResource("hahaha", withExtension: "gif")!
+            return Bundle.main.url(forResource: "hahaha", withExtension: "gif")!
         case .Remote:
             return URL(string: "http://ww1.sinaimg.cn/large/65312d9agw1f59leskkcij20cs0csmym.jpg")!
         case .AttachmentRemote:
@@ -55,11 +55,16 @@ extension URL {
 
 extension URLSession {
     
-    class func downloadImage(atURL url: URL, withCompletionHandler completionHandler: (Data?, NSError?) -> Void) {
-        let dataTask = URLSession.shared().dataTask(with: url) { (data, urlResponse, error) in
-            completionHandler(data, error)
-        }
-        dataTask.resume()
+    class func downloadImage(atURL url: URL, withCompletionHandler completionHandler: @escaping (Data?, NSError?) -> Void) {
+        
+        //var request = URLRequest(url:url)
+        
+        //URLSession.shared.dataTask(with: request) {data, response, error in
+        //    completionHandler(data, error)
+        //    }.resume()
+
+        
+        
     }
 }
 

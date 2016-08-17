@@ -31,13 +31,13 @@ class NotificationService: UNNotificationServiceExtension {
     var bestAttemptContent: UNMutableNotificationContent?
     
     override func didReceive(_ request: UNNotificationRequest,
-                             withContentHandler contentHandler:(UNNotificationContent) -> Void) {
-        
+                    withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
      
         //  get app group fmURL. If you reset group, remember reset GroupIdentifier
-        let fmURL: URL? = FileManager.default().containerURLForSecurityApplicationGroupIdentifier("group.emm")
+        let fmURL: URL? = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.codigo.advancenotification")
         
         LOG_WARNING
         print("If you reset app group or provisioning Profile, remember reset GroupIdentifier")
@@ -58,7 +58,7 @@ class NotificationService: UNNotificationServiceExtension {
                 // out put error by notification
                 if let bestAttemptContent = self.bestAttemptContent {
                     bestAttemptContent.title = "customAttachmentPic"
-                    bestAttemptContent.body = String(error)
+                    bestAttemptContent.body = error.localizedDescription
                     contentHandler(bestAttemptContent)
                     return
                 }

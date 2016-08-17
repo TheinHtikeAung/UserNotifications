@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
     
-        center.requestAuthorization([.alert, .sound, .badge]) { (granted, error) in
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if granted == true {
                 application.registerForRemoteNotifications()
             }
@@ -38,13 +38,13 @@ extension AppDelegate {
         print("device token = " + deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: ""))
     }
     
-    func application(_ application: UIApplication,
+    @nonobjc func application(_ application: UIApplication,
                      didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         
         print("If want test remote push, please use device");
     }
     
-    func application(_ application: UIApplication,
+    @nonobjc func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
                      fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
     }
